@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Index  from "../views/Index.vue";
 
 Vue.use(VueRouter)
 
@@ -10,6 +11,14 @@ const routes = [
     name: 'home',
     component: Home
   },
+
+  {
+    path: '/Index',
+    name: 'Index',
+    component: Index
+  },
+
+
   {
     path: '/login',
     name: 'Login',

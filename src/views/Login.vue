@@ -52,7 +52,8 @@ export default {
       loginForm: {
         username: '',
         password: '',
-        code: ''
+        code: '',
+        token:''
       },
       rules: {
         username: [
@@ -66,14 +67,24 @@ export default {
           { min: 5, max: 5, message: '长度为5 个字符', trigger: 'blur' }
         ]
 
-      }
+      },
+      codeImg:''
     };
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          this.$axios.post('/login',this.loginForm).then(({headers,data}) =>{
+            console.log("headers:",headers)
+            const jwt = data.headers['authorization'] || data.headers['Authorization']
+            console.log("用户点击登录时，提交的随机码：",jwt)
+            this.$store.commit('SET_TOKEN',jwt)
+            this.$router.push("/index")
+          })
+          .catch(error =>{
+                console.log('登录失败:',error)
+          })
         } else {
           console.log('error submit!!');
           return false;
@@ -82,7 +93,21 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    getCaptcha(){
+      this.$axios.get('/captcha').then(res =>{
+        if(res.data && res.data.data){
+          this.loginForm.token = res.data.data.token || ''
+          console.log("mock（模拟服务器生成的随机码:）",this.loginForm.token)
+          this.codeImg = res.data.data.captchaImg
+       }
+      }).catch(error =>{
+          console.log('获取验证码失败:',error)
+      })
     }
+  },
+  created() {
+    this.getCaptcha()
   }
 }
 </script>
