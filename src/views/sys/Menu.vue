@@ -3,15 +3,14 @@
 </script>
 
 <template>
-
+  <div>菜单管理</div>
 </template>
-  <div>main</div>
+
 <script>
   export default {
-      name:"Index"
+    name:"Menu.vue"
   }
 </script>
-
 
 <style scoped>
 

@@ -3,15 +3,14 @@
 </script>
 
 <template>
-
+  <div>用户管理</div>
 </template>
-  <div>main</div>
+
 <script>
   export default {
-      name:"Index"
+    name:"User.vue"
   }
 </script>
-
 
 <style scoped>
 

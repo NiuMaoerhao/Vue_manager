@@ -3,15 +3,14 @@
 </script>
 
 <template>
-
+  <div>角色管理</div>
 </template>
-  <div>main</div>
+
 <script>
   export default {
-      name:"Index"
+    name:"Role.vue"
   }
 </script>
-
 
 <style scoped>
 
