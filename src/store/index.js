@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import menu from "@/store/modules/menu";
 
 Vue.use(Vuex)
 
@@ -11,7 +12,7 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_TOKEN:(state,token)=>{
-      console.log("localStorage中存储的随机码:",token)
+      //console.log("localStorage中存储的随机码:",token)
       state.token = token
       localStorage.setItem("token",token)
     },
@@ -22,5 +23,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    menu
   }
 })
