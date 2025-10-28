@@ -1,6 +1,7 @@
 <script setup>
 
 import user from "./sys/User.vue";
+//import Tabs from "@/views/inc/Tabs.vue";
 </script>
 
 <template>
@@ -32,17 +33,21 @@ import user from "./sys/User.vue";
 
       </el-header>
 
-      <el-main><router-view></router-view></el-main>
+      <el-main>
+        <tabs></tabs>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
   import SideMenu from "@/views/inc/SideMenu.vue";
+  import Tabs from "./inc/Tabs"
   export default {
     name:"Home",
     components:{
-      SideMenu
+      SideMenu,Tabs
     },
     data(){
       return{
@@ -69,7 +74,7 @@ import user from "./sys/User.vue";
 
         this.$store.commit("resetState")
 
-        this.$router.push("/login")
+        this.$router.push("/login").catch(() =>{});
       }
     }
 
@@ -119,7 +124,7 @@ import user from "./sys/User.vue";
 .el-main {
   color: #333;
   text-align: center;
-  line-height: 160px;
+  //line-height: 160px;
   padding: 0;
 }
 
