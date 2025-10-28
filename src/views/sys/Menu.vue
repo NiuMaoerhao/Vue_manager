@@ -77,11 +77,11 @@
           prop="Operate"
           label="操作">
         <template slot-scope="scope">
-          <el-button type="text">编辑</el-button>
+          <el-button type="text" @click="editHandle(scope.row.id)">编辑</el-button>
           <el-divider direction="vertical"></el-divider>
 
           <template>
-            <el-popconfirm
+            <el-popconfirm @confirm="delHandle(scope.row.id)"
               title="确定删除吗"
               >
                 <el-button type="text" slot="reference">删除</el-button>
@@ -205,9 +205,62 @@
         this.$axios.get('/sys/menu/list').then(res => {
           this.tableData = res.data.data
         })
-      }
-    }
+      },
+      submitForm(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.$axios.post('/sys/menu/'+(this.editForm.id?'update':'save'), this.editForm)
+                .then(res => {
+                  this.$message({
+                    showClose: true,
+                    message: '恭喜，操作成功',
+                    type: 'success',
+                    onClose:()=>{
+                      this.getMenuTree()
+                    }
+                  });
+                  this.resetForm('editForm')
 
+                })
+                .catch(error => {
+                  console.error('操作失败:', error)
+                })
+
+          }
+          else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      editHandle(id){
+        this.$axios.get("/sys/menu/info/"+id).then(res =>{
+          this.editForm = res.data.data
+          this.dialogVisible = true
+        })
+      },
+      resetForm(formName){
+        this.$refs[formName].resetFields();
+        this.dialogVisible = false
+        this.editForm ={}
+      },
+      handleClose(){
+        this.resetForm('editForm')
+      },
+      delHandle(id){
+        this.$axios.post('/sys/menu/delete'+id).then(res =>{
+          this.$message({
+            showClose:true,
+            message:'删除成功',
+            type:'success',
+            onClose:()=>{
+              this.getMenuTree()
+            }
+          })
+        })
+      }
+
+    }
   }
 </script>
 
