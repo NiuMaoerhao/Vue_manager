@@ -35,7 +35,9 @@ import user from "./sys/User.vue";
 
       <el-main>
         <tabs></tabs>
-        <router-view></router-view>
+        <dir style="margin: 0 15px">
+          <router-view/>
+        </dir>
       </el-main>
     </el-container>
   </el-container>
@@ -123,7 +125,7 @@ import user from "./sys/User.vue";
 
 .el-main {
   color: #333;
-  text-align: center;
+  text-align: left;
   //line-height: 160px;
   padding: 0;
 }
