@@ -202,7 +202,7 @@
     },
     methods:{
       getMenuTree(){
-        this.$axios.get('/sys/menu/list').then(res => {
+        this.$axios.get('/sys/menu/list/').then(res => {
           this.tableData = res.data.data
         })
       },
@@ -248,7 +248,7 @@
         this.resetForm('editForm')
       },
       delHandle(id){
-        this.$axios.post('/sys/menu/delete'+id).then(res =>{
+        this.$axios.post('/sys/menu/delete/'+id).then(res =>{
           this.$message({
             showClose:true,
             message:'删除成功',
@@ -256,7 +256,7 @@
             onClose:()=>{
               this.getMenuTree()
             }
-          })
+          });
         })
       }
 
